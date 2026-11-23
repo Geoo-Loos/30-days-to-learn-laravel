@@ -12,6 +12,8 @@ services:
 
     environment:
       - DB_HOST=mysql
+      - DB_USERNAME=root
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
     depends_on:
       - mysql
 
@@ -21,7 +23,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: 30_days_to_learn_laravel
-      MYSQL_ROOT_PASSWORD: 200518
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
     ports:
       - "3306:3306"
     volumes:
