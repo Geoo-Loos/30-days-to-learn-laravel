@@ -1,0 +1,5 @@
+FROM php:8.2-apache
+
+# Instala o driver do MySQL para o PHP e ativa o mod_rewrite do Apache
+RUN docker-php-ext-install pdo_mysql pdo mysqli
+RUN a2enmod rewrite

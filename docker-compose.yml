@@ -1,0 +1,31 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: 30_days_to_learn_laravel
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/vhost.conf:/etc/apache2/sites-available/000-default.conf
+
+    environment:
+      - DB_HOST=mysql
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_30_days
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: 30_days_to_learn_laravel
+      MYSQL_ROOT_PASSWORD: 200518
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
