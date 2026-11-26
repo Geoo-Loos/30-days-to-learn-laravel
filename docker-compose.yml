@@ -12,7 +12,6 @@ services:
 
     environment:
       - DB_HOST=mysql
-      - DB_USERNAME=root
       - DB_PASSWORD=${DB_PASSWORD:-secret}
     depends_on:
       - mysql

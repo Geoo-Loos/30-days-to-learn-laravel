@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\JobPosted;
 use App\Models\Job;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,16 +31,20 @@ class JobController extends Controller
 
     public function store()
     {
+
+    $employer = auth()->user()?->employer;
         request()->validate([
             'title' => ['required', 'min:3'],
             'salary' => ['required']
         ]);
 
-        $job = Job::create([
+      $attributes= Job::create([
             'title' => request('title'),
             'salary' => request('salary'),
             'employer_id' => 1
         ]);
+
+        $job= $employer->jobs()->create($attributes);
 
         Mail::to($job->employer->user)->queue(
             new JobPosted($job)

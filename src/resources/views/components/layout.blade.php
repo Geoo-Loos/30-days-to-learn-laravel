@@ -16,7 +16,7 @@
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="h-8 w-8" src="https://laracasts.com/images/logo/logo-triangle.svg"
+                            <img class="h-20 w-22" src="{{ asset('images/Logo01.png')}}"
                                  alt="Your Company">
                         </div>
                         <div class="hidden md:block">
@@ -105,8 +105,9 @@
         <header class="bg-white shadow">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
-
+                       @auth
                 <x-button href="/jobs/create">Create Job</x-button>
+                       @endauth
             </div>
         </header>
 
